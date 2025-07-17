@@ -1,0 +1,39 @@
+{
+  "compilerOptions": {
+    "paths": {
+      "@tron/tronweb": ["./src/local-types/tron__tronweb"]
+    },
+    "target": "ES2020",
+    "lib": ["es2017"],
+    "module": "commonjs",
+    "outDir": "./dist",
+    "strict": true,
+    "baseUrl": "./",
+    "declaration": true,
+    "typeRoots": ["node_modules/@types", "typings"],
+    "types": ["node", "jest"],
+    "esModuleInterop": true,
+    "inlineSourceMap": true,
+    "experimentalDecorators": true,
+    "resolveJsonModule": true,
+    "emitDecoratorMetadata": true,
+    "strictPropertyInitialization": false,
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true
+  },
+  "include": [
+    "src/**/*",
+    "**/*.test.ts",
+    "**/*.spec.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "./src/base.ts",
+    "./src/services/AddressService.ts",
+    "./src/services/*"
+  ],
+  "typedocOptions": {
+    "out": "docs"
+  }
+}
