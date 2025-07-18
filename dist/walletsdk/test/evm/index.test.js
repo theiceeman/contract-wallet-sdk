@@ -17,12 +17,9 @@ const MASTER_WALLET_ADDRESS = '0x606bCAE4De681E6145817FB6267636E6795Eec80';
 const CHILD_WALLET_ADDRESS = '0x207c37EB73150ADda672B2340AfF85f1FB05e844';
 const CURRENT_WALLET_ADDRESS = '0x207c37EB73150ADda672B2340AfF85f1FB05e844';
 let walletSdk;
-/*
-master: 0x606bCAE4De681E6145817FB6267636E6795Eec80
-child:  0x207c37EB73150ADda672B2340AfF85f1FB05e844
- */
 beforeAll(async () => {
-    walletSdk = new walletsdk_1.default(types_1.EvmChain.BASE, "evm", "testnet", PRIVATE_KEY, CURRENT_WALLET_ADDRESS);
+    walletSdk = new walletsdk_1.default(types_1.EvmChain.BASE, "evm", "testnet", PRIVATE_KEY);
+    // walletSdk = new WalletSDK(EvmChain.BASE, "evm", "testnet", PRIVATE_KEY, CURRENT_WALLET_ADDRESS);
 });
 /* describe("predictAddress", () => {
   test("should predict deployment address successfully", async () => {
@@ -38,46 +35,45 @@ beforeAll(async () => {
   });
 });
 */
-/* describe("deployAddress", () => {
-  test("should fail if invalid salt is passed", async () => {
-    const deployAddressParam = {
-      name: "",
-      enableAutoFlush: true,
-    };
-    await expect(walletSdk.deployAddress(deployAddressParam)).rejects.toThrow();
-  });
-
-  test("should deploy to predicted address", async () => {
-    try {
-      const deployAddressParam = {
-        name: salt,
-        enableAutoFlush: true,
-      };
-      let result = await walletSdk.deployAddress(deployAddressParam);
-      console.log({ result })
-      expect(typeof result).toEqual("object");
-    } catch (error) {
-      console.error("deployAddress (valid) test failed:", error);
-      throw error;
-    }
-  });
-
-  test("should deploy with custom master address", async () => {
-    try {
-      const deployAddressParam = {
-        name: salt,
-        enableAutoFlush: true,
-        masterAddress: "0x606bCAE4De681E6145817FB6267636E6795Eec80",
-      };
-      let result = await walletSdk.deployAddress(deployAddressParam);
-      console.log({result})
-      expect(typeof result).toEqual("object");
-    } catch (error) {
-      console.error("deployAddress (custom master) test failed:", error);
-      throw error;
-    }
-  });
-}); */
+describe("deployAddress", () => {
+    // test("should fail if invalid salt is passed", async () => {
+    //   const deployAddressParam = {
+    //     name: "",
+    //     enableAutoFlush: true,
+    //   };
+    //   await expect(walletSdk.deployAddress(deployAddressParam)).rejects.toThrow();
+    // });
+    // test("should deploy to predicted address", async () => {
+    //   try {
+    //     const deployAddressParam = {
+    //       name: salt,
+    //       enableAutoFlush: true,
+    //     };
+    //     let result = await walletSdk.deployAddress(deployAddressParam);
+    //     console.log({ result })
+    //     expect(typeof result).toEqual("string");
+    //   } catch (error) {
+    //     console.error("deployAddress (valid) test failed:", error);
+    //     throw error;
+    //   }
+    // });
+    test("should deploy with custom master address", async () => {
+        try {
+            const deployAddressParam = {
+                name: salt,
+                enableAutoFlush: true,
+                masterAddress: "0x606bCAE4De681E6145817FB6267636E6795Eec80",
+            };
+            let result = await walletSdk.deployAddress(deployAddressParam);
+            console.log({ result });
+            expect(typeof result).toEqual("string");
+        }
+        catch (error) {
+            console.error("deployAddress (custom master) test failed:", error);
+            throw error;
+        }
+    });
+});
 /* describe("getBalance", () => {
   test("should return balance of token", async () => {
     const getBalanceParam = {
@@ -252,4 +248,4 @@ describe("flush", () => {
     // Optionally, check the balance of the master address after flush
   });
 }); */
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXgudGVzdC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uL3NyYy93YWxsZXRzZGsvdGVzdC9ldm0vaW5kZXgudGVzdC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQUE7OztHQUdHOzs7OztBQUVILG9EQUE0QjtBQUM1QixtRUFBMkM7QUFDM0MsNkNBQTZDO0FBRTdDLGdCQUFNLENBQUMsTUFBTSxFQUFFLENBQUM7QUFFaEIsTUFBTSxXQUFXLEdBQUcsT0FBTyxDQUFDLEdBQUcsQ0FBQyxvQkFBb0IsSUFBSSxFQUFFLENBQUM7QUFDM0QsTUFBTSxJQUFJLEdBQUcsbUJBQW1CLElBQUksQ0FBQyxLQUFLLENBQUMsSUFBSSxDQUFDLE1BQU0sRUFBRSxHQUFHLElBQUksQ0FBQyxHQUFHLENBQUMsRUFBRSxDQUFDO0FBQ3ZFLE1BQU0scUJBQXFCLEdBQUcsNENBQTRDLENBQUE7QUFDMUUsTUFBTSxvQkFBb0IsR0FBRyw0Q0FBNEMsQ0FBQTtBQUV6RSxNQUFNLHNCQUFzQixHQUFHLDRDQUE0QyxDQUFBO0FBRzNFLElBQUksU0FBb0IsQ0FBQztBQUd6Qjs7O0dBR0c7QUFJSCxTQUFTLENBQUMsS0FBSyxJQUFJLEVBQUU7SUFDbkIsU0FBUyxHQUFHLElBQUksbUJBQVMsQ0FBQyxnQkFBUSxDQUFDLElBQUksRUFBRSxLQUFLLEVBQUUsU0FBUyxFQUFFLFdBQVcsRUFBRSxzQkFBc0IsQ0FBQyxDQUFDO0FBQ2xHLENBQUMsQ0FBQyxDQUFDO0FBRUg7Ozs7Ozs7Ozs7Ozs7RUFhRTtBQUdGOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7TUF1Q007QUFHTjs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O01BOEJNO0FBTU47Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O01BNENNO0FBR047Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O01Bc0NNO0FBRU47Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztPQWlDTztBQUVQOzs7Ozs7Ozs7O01BVU07QUFFTjs7Ozs7Ozs7Ozs7OztNQWFNIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXgudGVzdC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uL3NyYy93YWxsZXRzZGsvdGVzdC9ldm0vaW5kZXgudGVzdC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQUE7OztHQUdHOzs7OztBQUVILG9EQUE0QjtBQUM1QixtRUFBMkM7QUFDM0MsNkNBQTZDO0FBRTdDLGdCQUFNLENBQUMsTUFBTSxFQUFFLENBQUM7QUFFaEIsTUFBTSxXQUFXLEdBQUcsT0FBTyxDQUFDLEdBQUcsQ0FBQyxvQkFBb0IsSUFBSSxFQUFFLENBQUM7QUFDM0QsTUFBTSxJQUFJLEdBQUcsbUJBQW1CLElBQUksQ0FBQyxLQUFLLENBQUMsSUFBSSxDQUFDLE1BQU0sRUFBRSxHQUFHLElBQUksQ0FBQyxHQUFHLENBQUMsRUFBRSxDQUFDO0FBQ3ZFLE1BQU0scUJBQXFCLEdBQUcsNENBQTRDLENBQUE7QUFDMUUsTUFBTSxvQkFBb0IsR0FBRyw0Q0FBNEMsQ0FBQTtBQUV6RSxNQUFNLHNCQUFzQixHQUFHLDRDQUE0QyxDQUFBO0FBRzNFLElBQUksU0FBb0IsQ0FBQztBQUt6QixTQUFTLENBQUMsS0FBSyxJQUFJLEVBQUU7SUFDbkIsU0FBUyxHQUFHLElBQUksbUJBQVMsQ0FBQyxnQkFBUSxDQUFDLElBQUksRUFBRSxLQUFLLEVBQUUsU0FBUyxFQUFFLFdBQVcsQ0FBQyxDQUFDO0lBQ3hFLG1HQUFtRztBQUNyRyxDQUFDLENBQUMsQ0FBQztBQUVIOzs7Ozs7Ozs7Ozs7O0VBYUU7QUFHRixRQUFRLENBQUMsZUFBZSxFQUFFLEdBQUcsRUFBRTtJQUM3Qiw4REFBOEQ7SUFDOUQsaUNBQWlDO0lBQ2pDLGdCQUFnQjtJQUNoQiw2QkFBNkI7SUFDN0IsT0FBTztJQUNQLGlGQUFpRjtJQUNqRixNQUFNO0lBRU4sMkRBQTJEO0lBQzNELFVBQVU7SUFDVixtQ0FBbUM7SUFDbkMsb0JBQW9CO0lBQ3BCLCtCQUErQjtJQUMvQixTQUFTO0lBQ1Qsc0VBQXNFO0lBQ3RFLDhCQUE4QjtJQUM5QiwrQ0FBK0M7SUFDL0Msc0JBQXNCO0lBQ3RCLGtFQUFrRTtJQUNsRSxtQkFBbUI7SUFDbkIsTUFBTTtJQUNOLE1BQU07SUFFTixJQUFJLENBQUMsMENBQTBDLEVBQUUsS0FBSyxJQUFJLEVBQUU7UUFDMUQsSUFBSSxDQUFDO1lBQ0gsTUFBTSxrQkFBa0IsR0FBRztnQkFDekIsSUFBSSxFQUFFLElBQUk7Z0JBQ1YsZUFBZSxFQUFFLElBQUk7Z0JBQ3JCLGFBQWEsRUFBRSw0Q0FBNEM7YUFDNUQsQ0FBQztZQUNGLElBQUksTUFBTSxHQUFHLE1BQU0sU0FBUyxDQUFDLGFBQWEsQ0FBQyxrQkFBa0IsQ0FBQyxDQUFDO1lBQy9ELE9BQU8sQ0FBQyxHQUFHLENBQUMsRUFBQyxNQUFNLEVBQUMsQ0FBQyxDQUFBO1lBQ3JCLE1BQU0sQ0FBQyxPQUFPLE1BQU0sQ0FBQyxDQUFDLE9BQU8sQ0FBQyxRQUFRLENBQUMsQ0FBQztRQUMxQyxDQUFDO1FBQUMsT0FBTyxLQUFLLEVBQUUsQ0FBQztZQUNmLE9BQU8sQ0FBQyxLQUFLLENBQUMsNENBQTRDLEVBQUUsS0FBSyxDQUFDLENBQUM7WUFDbkUsTUFBTSxLQUFLLENBQUM7UUFDZCxDQUFDO0lBQ0gsQ0FBQyxDQUFDLENBQUM7QUFDTCxDQUFDLENBQUMsQ0FBQztBQUdIOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7TUE4Qk07QUFNTjs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7TUE0Q007QUFHTjs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7TUFzQ007QUFFTjs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O09BaUNPO0FBRVA7Ozs7Ozs7Ozs7TUFVTTtBQUVOOzs7Ozs7Ozs7Ozs7O01BYU0ifQ==

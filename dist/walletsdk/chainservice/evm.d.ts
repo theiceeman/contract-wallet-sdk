@@ -76,7 +76,7 @@ export declare class EvmChainService {
      * @param params.masterAddress - Optional master address for the deployed wallet. If not provided, uses the user's public address.
      * @returns Transaction object for the deployed contract.
      */
-    deployAddress(params: deployAddressParam): Promise<any>;
+    deployAddress(params: deployAddressParam): Promise<string>;
     /**
      * This ensure address predicted is uniquely generated using the given salt
      * and the onwer address. This would eliminate colliding addresses.

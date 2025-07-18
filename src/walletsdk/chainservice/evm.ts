@@ -262,11 +262,11 @@ export class EvmChainService {
    * @param params.masterAddress - Optional master address for the deployed wallet. If not provided, uses the user's public address.
    * @returns Transaction object for the deployed contract.
    */
-  public async deployAddress(params: deployAddressParam) {
+  public async deployAddress(params: deployAddressParam): Promise<string> {
     const masterAddress = params.masterAddress || this._publicAddress;
-    
+    const factoryInstance = await this._factoryContractInstance();
     let data = await this.contractInteraction(
-      await this._factoryContractInstance(),
+      factoryInstance,
       [
         this._addressContractAddress,
         masterAddress,
@@ -276,10 +276,21 @@ export class EvmChainService {
       "deployAddress",
       "send"
     );
-    return await this.sendNewTransactionWithData(
+    // Send the transaction and get the receipt
+    const receipt = await this.sendNewTransactionWithData(
       data,
       this._factoryContractAddress
     );
+
+    // Use web3 to compute the Cloned event signature from the ABI
+    const clonedEventAbi = EVMFactoryABI.abi.find((i: any) => i.type === 'event' && i.name === 'Cloned');
+    if (!clonedEventAbi) throw new Error('Cloned event ABI not found');
+
+    const clonedEventSig = this._blockchainConnector.eth.abi.encodeEventSignature(clonedEventAbi);
+    const clonedLog = receipt.logs.find((log: any) => log.topics && log.topics[0] === clonedEventSig);
+    if (clonedLog) return '0x' + clonedLog.topics[1].slice(26);
+
+    throw new Error('Deployed address not found in transaction logs');
   }
 
   /**

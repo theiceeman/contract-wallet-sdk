@@ -20,15 +20,11 @@ const CURRENT_WALLET_ADDRESS = '0x207c37EB73150ADda672B2340AfF85f1FB05e844'
 let walletSdk: WalletSDK;
 
 
-/* 
-master: 0x606bCAE4De681E6145817FB6267636E6795Eec80
-child:  0x207c37EB73150ADda672B2340AfF85f1FB05e844
- */
-
 
 
 beforeAll(async () => {
-  walletSdk = new WalletSDK(EvmChain.BASE, "evm", "testnet", PRIVATE_KEY, CURRENT_WALLET_ADDRESS);
+  walletSdk = new WalletSDK(EvmChain.BASE, "evm", "testnet", PRIVATE_KEY);
+  // walletSdk = new WalletSDK(EvmChain.BASE, "evm", "testnet", PRIVATE_KEY, CURRENT_WALLET_ADDRESS);
 });
 
 /* describe("predictAddress", () => {
@@ -47,29 +43,29 @@ beforeAll(async () => {
 */
 
 
-/* describe("deployAddress", () => {
-  test("should fail if invalid salt is passed", async () => {
-    const deployAddressParam = {
-      name: "",
-      enableAutoFlush: true,
-    };
-    await expect(walletSdk.deployAddress(deployAddressParam)).rejects.toThrow();
-  });
+describe("deployAddress", () => {
+  // test("should fail if invalid salt is passed", async () => {
+  //   const deployAddressParam = {
+  //     name: "",
+  //     enableAutoFlush: true,
+  //   };
+  //   await expect(walletSdk.deployAddress(deployAddressParam)).rejects.toThrow();
+  // });
 
-  test("should deploy to predicted address", async () => {
-    try {
-      const deployAddressParam = {
-        name: salt,
-        enableAutoFlush: true,
-      };
-      let result = await walletSdk.deployAddress(deployAddressParam);
-      console.log({ result })
-      expect(typeof result).toEqual("object");
-    } catch (error) {
-      console.error("deployAddress (valid) test failed:", error);
-      throw error;
-    }
-  });
+  // test("should deploy to predicted address", async () => {
+  //   try {
+  //     const deployAddressParam = {
+  //       name: salt,
+  //       enableAutoFlush: true,
+  //     };
+  //     let result = await walletSdk.deployAddress(deployAddressParam);
+  //     console.log({ result })
+  //     expect(typeof result).toEqual("string");
+  //   } catch (error) {
+  //     console.error("deployAddress (valid) test failed:", error);
+  //     throw error;
+  //   }
+  // });
 
   test("should deploy with custom master address", async () => {
     try {
@@ -80,13 +76,13 @@ beforeAll(async () => {
       };
       let result = await walletSdk.deployAddress(deployAddressParam);
       console.log({result})
-      expect(typeof result).toEqual("object");
+      expect(typeof result).toEqual("string");
     } catch (error) {
       console.error("deployAddress (custom master) test failed:", error);
       throw error;
     }
   });
-}); */
+});
 
 
 /* describe("getBalance", () => {
