@@ -2,7 +2,7 @@
   "name": "contract-wallet-sdk",
   "version": "0.0.11",
   "description": "Contract wallet sdk allows browsers and Node.js clients to deploy and manage contract wallets onchain.",
-  "main": "dist/src/index.js",
+  "main": "dist/index.js",
   "files": [
     "dist/"
   ],
@@ -17,7 +17,7 @@
     "docs": "typedoc",
     "lint": "eslint ./src --ext .ts --fix"
   },
-  "types": "dist/src/index.d.ts",
+  "types": "dist/index.d.ts",
   "keywords": [
     "Ethereum",
     "Tron",
